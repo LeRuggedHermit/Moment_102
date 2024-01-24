@@ -1,0 +1,106 @@
+﻿@page "/convert"
+
+<PageTitle>Konvertera</PageTitle>
+
+<div>
+    <h1>Konvertings-sidan!</h1>
+<p>Här kan du konvertera lite olika saker!</p>
+</div>
+
+<h3>Konvertera enheter här:</h3>
+
+<!-- här väljer du enhet du vill konvertera: -->
+<div class ="selector">
+    <label for="unitType">välj den enhet du vill konvertera:</label>
+    <!-- Selecten är kopplad till en variabel vi använder senare -->
+    <select id="unitType" @bind="selectedUnit">
+         <!--man kan välja följande: -->
+        <option value="meterTillFot">Meter till Feet</option>
+        <option value="kmPerHourTillMph">Km/h till Mph</option>
+    </select>
+</div>
+
+ <!-- här fyller du mängden av den enhet du vill kovertera: -->
+<div class="inputer">
+    <label for="meterInput">Skriv in längd i meter:</label>
+    <input type="number" id="inputValue" @bind="inputValue" />
+     <!-- vid klick triggas konverteringsfunktionen: -->
+    <button @onclick="Konvertera">Convert</button>
+</div>
+
+ <!-- om vi har ett resultat: -->
+@if (result != null)
+{
+     // visas denna: 
+    <div class="resulter">
+         <!-- vi hämtar in enheter och trimmar till två decimaler: -->
+        <p>@unitLabels[selectedUnit].InputUnit är likamed @String.Format("{0:0.0}", result) @unitLabels[selectedUnit].OutputUnit. (amerikanerna är galna)</p>
+    </div>
+}
+else{
+    // och om resultatet är null visas denna:
+    <div class="resulter">
+        <p>Du har inte konverterat något än!</p>
+    </div>
+}
+
+@code {
+    //Tre variabler matchande vald enhet, input och resultat
+    private string selectedUnit = "meterTillFot";
+    private double? inputValue;
+    private double? result;
+
+//ett dictionary som används för att spara enheternas beteckningar för framtida output:
+    private Dictionary<string, (string InputUnit, string OutputUnit)> unitLabels = new Dictionary<string, (string InputUnit, string OutputUnit)>
+    {
+        { "meterTillFot", ("meters", "feet") },
+        { "kmPerHourTillMph", ("km/h", "mph") }
+    };
+    //konverterings switch så vi vet vilken enhet vi konverterar:
+    private void Konvertera()
+    {
+      switch (selectedUnit)
+        {
+            case "meterTillFot":
+                ConvertMeterToFeet();
+                break;
+            case "kmPerHourTillMph":
+                ConvertKmPerHourToMph();
+                break;
+            default:
+                result = null;
+                break;
+        }
+    }
+
+    //konverterar meter till fot:
+ private void ConvertMeterToFeet()
+    {
+        if (inputValue.HasValue)
+        {
+            // 1 meter = 3.28084 fot därav:
+            result = inputValue.Value * 3.28084;
+        }
+        else
+        {
+            result = null;
+        }
+    }
+
+//konverterar km/h till mph:
+     private void ConvertKmPerHourToMph()
+    {
+        if (inputValue.HasValue)
+        {
+            // 1 km/h = 0.621371 mph därav:
+            result = inputValue.Value * 0.621371;
+        }
+        else
+        {
+            result = null;
+        }
+    }
+
+
+
+}

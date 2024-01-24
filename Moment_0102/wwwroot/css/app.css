@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    padding: 0;
+    outline:0;
+    background-color: rgb(235, 226, 213);
+    font-family: "Roboto";
+  }
+  
+  header{
+    background-color: rgb(190, 179, 165);
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-bottom: 1px grey solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  img{
+    width: 15%;
+    margin: 1%;
+    border-radius: 15px;
+    border: solid rgb(0, 0, 0) 4px;
+  }
+  
+  #timebox{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-right: 3%;
+  }
+  
+  #timebox p{
+    font-weight: 500;
+    text-decoration: underline;
+  }
+  
+  aside{
+    width: 20%;
+    height: 100vh;
+    background-color: darkgray;
+    margin-right: 5%;
+    margin-left: 2%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.457);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+  }
+  
+  main{
+    border: solid black 2px;
+    width: 65%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top:2%;
+    padding-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .nav_li{
+    list-style-type: none;
+    font-size: 150%;
+    margin-top: 5%;
+  }
+  
+  .navlink{
+    color: black;
+  }
+  
+  .navlink:hover{
+    color: green;
+  }
+  
+  .container{
+    margin-bottom: 250px;
+    display: flex;
+    flex-direction: row;
+  }
+
+.selector,
+.inputer,
+.resulter{
+  margin-top: 30px;
+  font-weight: 400;
+  font-size: 120%;
+}
+
+.selector select{
+  width: 160px;
+  height: 40px;
+}
+
+.inputer input{
+  width: 160px;
+  height: 40px;
+}
+
+.inputer button{
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+}
+  
+  .movie{
+    list-style: none;
+    font-weight: 400;
+    font-size: 150%;
+  }
+
+
+  footer{
+  text-align: center;
+  }
+  
+  
+  /*Media Query för små skärmar*/
+  @media screen and (max-width: 1000px) {
+    .container{
+      margin-bottom: 250px;
+      display: flex;
+      flex-direction: column;
+    }
+  
+  aside{
+    height: 20%;
+    width: 80%;
+    align-self: center;
+    margin-bottom: 30px;
+  }
+  
+  main{
+    width: 80%;
+    align-self: center;
+  }
+  
+  }

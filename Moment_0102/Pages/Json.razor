@@ -1,0 +1,55 @@
+﻿@page "/Json"
+
+<PageTitle>Json-sidan</PageTitle>
+
+<div>
+
+    <h1>Välkommen till JSON-sidan! här läser vi in Quentin Tarantinos filmer från JSON!</h1>
+
+</div>
+
+<!-- om vi har någon data och denna data inte är null: -->
+<!-- så ska vi foreach-loopa genom datan och skriva ut i listan enligt följande: -->
+@if (jsonData != null && jsonData.Any())
+{
+    <ul>
+        @foreach (var item in jsonData)
+        {
+            <li class="movie">@item.year - @item.name</li>
+        }
+    </ul>
+}
+else
+{
+    //annars kan vi skriva ut detta:
+    <p>Laddar data...</p>
+}
+
+<div>
+
+</div>
+
+@code {
+    //injicerar httpclient i programmet:
+    @inject HttpClient HttpClient
+    //min lista med datamodellen:
+    private List<DataModel> jsonData = new List<DataModel>();
+        
+   
+//en asynkron task som använder den inbyggda oninitializedAsync funktionen för att...
+    protected override async Task OnInitializedAsync()
+    {
+        // ...använda httpclient till att hämta data från min JSONfil:
+        //Gör mottagen data till en instans av datamodel-klassen
+        jsonData = await HttpClient.GetFromJsonAsync<List<DataModel>>("sample-data/Tarantino.json") ?? new
+        List<DataModel>();
+    }
+//En klass vars innehåll motsvarar innehåll i JSON-objekten:
+    public class DataModel
+    {
+        public int year { get; set; }
+          public string name { get; set; } = "";
+
+    }
+
+}
